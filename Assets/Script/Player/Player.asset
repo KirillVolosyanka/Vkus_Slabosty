@@ -15,7 +15,7 @@ MonoBehaviour:
   runMaxSpeed: 9.5
   runAccelAmount: 5
   runDeccelAmount: 7
-  jumpForce: 9
+  jumpForce: 11
   coyoteTime: 0.2
   jumpInputBufferTime: 0.2
   accelInAir: 0

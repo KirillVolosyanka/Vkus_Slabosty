@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Layers")]
     [SerializeField] private LayerMask whatIsGround;
 
+    [Header("Player Animation Settings")]
+    public Animator animator;
+
     private void Awake()
     {
         IsFacingRight = true;
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
+        animator.SetFloat("HorizontalMove", Mathf.Abs(moveInput.x));
 
         if (moveInput.x != 0 && !IsJumping)
         {
@@ -61,6 +65,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJumpInput();
+        }
+
+        if (Physics2D.OverlapBox(groundCheckerPoint.position, groundCheckerSize, 0, whatIsGround))
+        {
+            animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            animator.SetBool("Jumping", true);
         }
 
         if (!IsJumping)
